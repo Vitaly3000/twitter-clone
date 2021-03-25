@@ -5,7 +5,7 @@ import twitterBg from './../../assets/img/twitter-bg.png';
 import { Button, FormControl, FormGroup, TextField } from '@material-ui/core';
 import { ModalBlock } from '../../components/ModalBlock';
 
-function SignIn() {
+export const SignIn: React.FC = (): React.ReactElement => {
   const [visibleModal, setVisibleModal] = React.useState<'signIn' | 'signUp'>();
   const handleClickOpenSignIn = (): void => {
     setVisibleModal('signIn');
@@ -153,6 +153,4 @@ function SignIn() {
       </section>
     </div>
   );
-}
-
-export default SignIn;
+};

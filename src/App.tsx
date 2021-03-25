@@ -1,9 +1,15 @@
-import SignIn from './pages/SignIn/SignIn';
+import { Route, Switch } from 'react-router';
+import { Home } from './pages/Home/Home';
+import {SignIn} from './pages/SignIn/SignIn';
 
 function App() {
   return (
     <div className="App">
-      <SignIn />
+      
+      <Switch>
+        <Route path="/signin" component={SignIn} />
+        <Route path="/" component={Home} />
+      </Switch>
       <footer
         style={{
           textAlign: 'center',

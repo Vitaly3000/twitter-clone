@@ -1,0 +1,19 @@
+.tweets__wrapper {
+  border-radius: 0;
+  height: 100%;
+  border-top: none;
+  border-bottom: none;
+}
+.tweets__header {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+  padding: 15px;
+  border-bottom: none;
+}
+.tweets__title {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+}

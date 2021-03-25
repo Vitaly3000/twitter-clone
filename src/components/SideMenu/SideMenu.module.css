@@ -1,0 +1,20 @@
+.sidebar__btn {
+ padding: 10px;
+ font-weight: 700;
+ border-radius: 999px;
+ color: #0f1419;
+ margin-bottom: 5px;
+ transition: background-color 0.15s ease-in-out ;
+}.sidebar__btn:hover {
+ background-color: rgba(29, 161, 242,0.2);
+ color: rgba(29, 161, 242,1);;
+}
+.sidebar__btn span {
+ font-size: 20px;
+ line-height: 24px;
+}
+
+.sidebar__btn-icon {
+ margin-right: 20px;
+ font-size: 27.5px;
+}
