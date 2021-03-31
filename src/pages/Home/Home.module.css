@@ -1,8 +1,18 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .tweets__wrapper {
   border-radius: 0;
-  height: 100%;
+  height: 100vh;
   border-top: none;
   border-bottom: none;
+  width: 100%;
+  max-width: 600px;
 }
 .tweets__header {
   border-top: none;
@@ -10,10 +20,19 @@
   border-left: none;
   border-radius: 0;
   padding: 15px;
-  border-bottom: none;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
 }
 .tweets__title {
   font-weight: 800;
   font-size: 20px;
   line-height: 24px;
+}
+
+@media screen and (max-width: 1000px) {
+  .rightSide {
+    display: none;
+  }
 }

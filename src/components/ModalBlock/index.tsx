@@ -8,7 +8,7 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 
 interface ModalProps {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   visible: boolean;
   onClose: () => void;
@@ -24,6 +24,7 @@ export const ModalBlock: React.FC<ModalProps> = ({
   }
   return (
     <Dialog
+      maxWidth="md"
       open={visible}
       onClose={onClose}
       aria-labelledby="form-dialog-title">
