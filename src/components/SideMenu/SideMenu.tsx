@@ -11,6 +11,7 @@ import PencilIcon from '@material-ui/icons/CreateOutlined';
 import styles from './SideMenu.module.css';
 import { ModalBlock } from '../ModalBlock';
 import { AddTweetForm } from '../AddTweetForm/AddTweetForm';
+import { Link } from 'react-router-dom';
 
 interface SideMenuProps {}
 export const SideMenu: React.FC<SideMenuProps> = (): React.ReactElement => {
@@ -27,9 +28,11 @@ export const SideMenu: React.FC<SideMenuProps> = (): React.ReactElement => {
   return (
     <ul style={{ padding: 0 }} className={styles['sidebar']}>
       <li>
-        <IconButton aria-label="delete" color="primary">
-          <TwitterIcon style={{ fontSize: '30px' }} color="primary" />
-        </IconButton>
+        <Link to="/home">
+          <IconButton aria-label="delete" color="primary">
+            <TwitterIcon style={{ fontSize: '30px' }} color="primary" />
+          </IconButton>
+        </Link>
       </li>
       <li>
         <IconButton className={styles['sidebar__btn']} aria-label="delete">

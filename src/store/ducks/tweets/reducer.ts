@@ -1,4 +1,4 @@
-import { TweetsActions, TweetsActionsType } from './actionCreators';
+import { TweetsActions, TweetsActionsType } from './contracts/actionsType';
 import { TweetsState, LoadingState } from './contracts/state';
 import produce, { Draft } from 'immer';
 

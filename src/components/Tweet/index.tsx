@@ -7,7 +7,10 @@ import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShareIcon from '@material-ui/icons/ShareOutlined';
 import classNames from 'classnames';
 import styles from './Tweet.module.css';
+import { Link } from 'react-router-dom';
+
 interface TweetProps {
+  _id: string;
   text: string;
   user: { username: string; fullname: string; avatarUrl: string };
 }
@@ -15,6 +18,7 @@ interface TweetProps {
 export const Tweet: React.FC<TweetProps> = ({
   text,
   user,
+  _id,
 }: TweetProps): React.ReactElement => {
   return (
     <div>
@@ -25,11 +29,12 @@ export const Tweet: React.FC<TweetProps> = ({
           src={user.avatarUrl}
         />
         <div className="tweet__body">
-          <div className={styles['user__name']}>
-            {user.username} <span>{user.fullname + ' · '}1ч</span>
-          </div>
-
-          <p className={styles['tweet__text']}>{text}</p>
+          <Link className={styles['tweetWrapper']} to={`/home/tweet/${_id}`}>
+            <div className={styles['user__name']}>
+              {user.fullname} <span>@{user.username + ' · '}1ч</span>
+            </div>
+            <p className={styles['tweet__text']}>{text}</p>{' '}
+          </Link>
           <div className={styles['tweet__btns']}>
             <div
               className={classNames(

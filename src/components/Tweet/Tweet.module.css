@@ -8,6 +8,10 @@
 
   align-items: flex-start;
 }
+.tweetWrapper {
+  text-decoration: none;
+  color: inherit;
+}
 .tweet__header {
   display: flex;
   align-items: top;
@@ -35,6 +39,8 @@
 .tweet__text {
   line-height: 20px;
   font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .tweet__btns {
   display: flex;

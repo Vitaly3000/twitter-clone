@@ -15,6 +15,8 @@
   max-width: 600px;
 }
 .tweets__header {
+  display: flex;
+  align-items: center;
   border-top: none;
   border-right: none;
   border-left: none;
@@ -25,6 +27,7 @@
   background-color: #fff;
   z-index: 10;
 }
+
 .tweets__title {
   font-weight: 800;
   font-size: 20px;
