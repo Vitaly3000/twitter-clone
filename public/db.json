@@ -7,7 +7,8 @@
         "fullname": "Sue Bradshaw",
         "username": "Mallory",
         "avatarUrl": "https://picsum.photos/200/300"
-      }
+      },
+      "id": "1"
     },
     {
       "_id": "6064d7f717ae346253202302",
@@ -16,39 +17,31 @@
         "fullname": "Kris Stewart",
         "username": "Odom",
         "avatarUrl": "https://source.unsplash.com/random"
-      }
+      },
+      "id": "2"
     },
     {
-      "_id": "6064d7f7f7b9d24429715460",
-      "text": "Aliqua occaecat aute nulla qui pariatur.",
+      "_id": "6inuqtdvs49",
+      "text": "Тестовый\n",
       "user": {
-        "fullname": "Randolph Dickerson",
-        "username": "Stanton",
-        "avatarUrl": "https://picsum.photos/200/300"
-      }
-    },
-    {
-      "_id": "6064d7f7ff036f3d1e05fd19",
-      "text": "Nulla qui laborum qui do.",
-      "user": {
-        "fullname": "Noelle Flores",
-        "username": "Florine",
+        "fullname": "vitaly Web",
+        "username": "Vitaly228",
         "avatarUrl": "https://source.unsplash.com/random"
-      }
-    },
-    {
-      "_id": "6064d7f7e68a6cff48cf57c6",
-      "text": "Magna dolor aliqua do pariatur fugiat consequat commodo ullamco mollit.",
-      "user": {
-        "fullname": "Eileen Gross",
-        "username": "Becker",
-        "avatarUrl": "https://picsum.photos/200/300"
-      }
+      },
+      "id": "ntPZZSV"
     }
   ],
   "tags": [
-    { "_id": "d2d243wd343443dwdw3", "name": "Навальный", "count": 144 },
-    { "_id": "d2243wwwd343443dwddwdw3", "name": "Гитлер", "count": 888 }
+    {
+      "_id": "d2d243wd343443dwdw3",
+      "name": "Навальный",
+      "count": 144
+    },
+    {
+      "_id": "d2243wwwd343443dwddwdw3",
+      "name": "Гитлер",
+      "count": 888
+    }
   ],
   "users": [
     {

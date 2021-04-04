@@ -10,6 +10,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import GifIcon from '@material-ui/icons/GifOutlined';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
+import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
+import { useDispatch } from 'react-redux';
 const useStyles = makeStyles({
   addTweetForm: {
     display: 'flex',
@@ -74,7 +76,9 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
       setText(e.currentTarget.value);
     }
   };
+  const dispatch = useDispatch();
   const handleClickAddTweet = (): void => {
+    dispatch(fetchAddTweet(text));
     setText('');
   };
   return (
