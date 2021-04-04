@@ -7,15 +7,19 @@ import {
   TextareaAutosize,
 } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Alert from '@material-ui/lab/Alert';
 import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import GifIcon from '@material-ui/icons/GifOutlined';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
 import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAddTweetState } from '../../store/ducks/tweets/selectors';
+import { AddFormState } from '../../store/ducks/tweets/contracts/state';
 const useStyles = makeStyles({
-  addTweetForm: {
+  addTweetForm: { margin: '10px 16px' },
+  addTweetFormWrapper: {
     display: 'flex',
-    margin: '5px 16px',
+    marginBottom: 5,
   },
   addTweetFormBody: {
     width: '100%',
@@ -76,77 +80,98 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
       setText(e.currentTarget.value);
     }
   };
+  const addTweetState = useSelector(selectAddTweetState);
+
   const dispatch = useDispatch();
   const handleClickAddTweet = (): void => {
     dispatch(fetchAddTweet(text));
     setText('');
   };
+
   return (
     <div className={classes.addTweetForm}>
-      <Avatar
-        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzd8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-        alt="Аватар пользователя"
-        className={classes.addTweetFormAvatar}
-      />
-      <div className={classes.addTweetFormBody}>
-        <TextareaAutosize
-          onChange={handleChangeTextarea}
-          className={classes.addTweetFormTextarea}
-          placeholder="Что происходит?"
-          value={text}
-          rowsMax={maxRows}
+      <div className={classes.addTweetFormWrapper}>
+        <Avatar
+          src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzd8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          alt="Аватар пользователя"
+          className={classes.addTweetFormAvatar}
         />
-        <div className={classes['addTweetFormBottom']}>
-          <div className={classes['addTweetFormBottomBtns']}>
-            <IconButton color="primary">
-              <ImageIcon />
-            </IconButton>
-            <IconButton color="primary">
-              <GifIcon />
-            </IconButton>
-            <IconButton color="primary">
-              <EmojiIcon />
-            </IconButton>
-          </div>
-          <div className={classes.addTweetFormBottomRight}>
-            {text && (
-              <>
-                <span
-                  style={
-                    text.length >= MAX_LENGTH ? { color: 'red' } : undefined
-                  }>
-                  {textCount}
-                </span>
-                <div className={classes.addTweetFormCircleProgress}>
-                  <CircularProgress
-                    variant="determinate"
-                    size={20}
-                    thickness={5}
-                    value={text.length >= MAX_LENGTH ? 100 : textLimitPercent}
+        <div className={classes.addTweetFormBody}>
+          <TextareaAutosize
+            onChange={handleChangeTextarea}
+            className={classes.addTweetFormTextarea}
+            placeholder="Что происходит?"
+            value={text}
+            rowsMax={maxRows}
+          />
+          <div className={classes['addTweetFormBottom']}>
+            <div className={classes['addTweetFormBottomBtns']}>
+              <IconButton color="primary">
+                <ImageIcon />
+              </IconButton>
+              <IconButton color="primary">
+                <GifIcon />
+              </IconButton>
+              <IconButton color="primary">
+                <EmojiIcon />
+              </IconButton>
+            </div>
+            <div className={classes.addTweetFormBottomRight}>
+              {text && (
+                <>
+                  <span
                     style={
                       text.length >= MAX_LENGTH ? { color: 'red' } : undefined
-                    }
-                  />
-                  <CircularProgress
-                    style={{ color: 'rgba(0,0,0,0.1)' }}
-                    variant="determinate"
-                    size={20}
-                    thickness={5}
-                    value={100}
-                  />
-                </div>
-              </>
-            )}
-            <Button
-              disabled={text.length >= MAX_LENGTH}
-              color="primary"
-              onClick={handleClickAddTweet}
-              variant="contained">
-              Твитнуть
-            </Button>
+                    }>
+                    {textCount}
+                  </span>
+                  <div className={classes.addTweetFormCircleProgress}>
+                    <CircularProgress
+                      variant="determinate"
+                      size={20}
+                      thickness={5}
+                      value={text.length >= MAX_LENGTH ? 100 : textLimitPercent}
+                      style={
+                        text.length >= MAX_LENGTH ? { color: 'red' } : undefined
+                      }
+                    />
+                    <CircularProgress
+                      style={{ color: 'rgba(0,0,0,0.1)' }}
+                      variant="determinate"
+                      size={20}
+                      thickness={5}
+                      value={100}
+                    />
+                  </div>
+                </>
+              )}
+              <Button
+                disabled={
+                  addTweetState === AddFormState.LOADING ||
+                  !text ||
+                  text.length >= MAX_LENGTH
+                }
+                color="primary"
+                onClick={handleClickAddTweet}
+                variant="contained">
+                {addTweetState === AddFormState.LOADING ? (
+                  <CircularProgress color="inherit" size={16} />
+                ) : (
+                  'Твитнуть'
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
+      {addTweetState === AddFormState.ERROR && (
+        <Alert severity="error">
+          Ошибка при добавлении твита{' '}
+          <span aria-label="emodji-plak" role="img">
+            😐
+          </span>
+        </Alert>
+      )}
     </div>
   );
 };

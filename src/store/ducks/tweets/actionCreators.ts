@@ -2,11 +2,17 @@ import {
   AddTweetActionType,
   FetchAddTweetActionType,
   FetchTweetsActionInterface,
+  SetAddFormStateActionInterface,
   SetTweetsActionInterface,
   SetTweetsLoadingStateActionInterface,
   TweetsActionsType,
 } from './contracts/actionsType';
-import { LoadingState, Tweet, TweetsState } from './contracts/state';
+import {
+  AddFormState,
+  LoadingState,
+  Tweet,
+  TweetsState,
+} from './contracts/state';
 
 export const setTweets = (
   payload: TweetsState['items'],
@@ -26,6 +32,12 @@ export const fetchAddTweet = (payload: string): FetchAddTweetActionType => ({
 });
 export const addTweet = (payload: Tweet): AddTweetActionType => ({
   type: TweetsActionsType.ADD_TWEET,
+  payload,
+});
+export const setAddFormState = (
+  payload: AddFormState,
+): SetAddFormStateActionInterface => ({
+  type: TweetsActionsType.SET_ADD_FORM_STATE,
   payload,
 });
 export const fetchTweets = (): FetchTweetsActionInterface => ({

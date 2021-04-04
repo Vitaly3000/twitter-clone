@@ -5,6 +5,9 @@
   width: 100%;
   margin: 0;
 }
+a {
+  text-decoration: none;
+}
 .sidebar__btn {
   padding: 10px;
   font-weight: 700;
@@ -17,9 +20,13 @@
   background-color: rgba(29, 161, 242, 0.2);
   color: rgba(29, 161, 242, 1);
 }
+.sidebar__btn-icon {
+  font-size: 34px;
+}
 .sidebar__btn-text {
   font-size: 20px;
   line-height: 24px;
+  margin-left: 10px;
 }
 .sidebar__btn--blue {
   padding: 15px;
@@ -32,7 +39,7 @@
 }
 @media screen and (max-width: 1000px) {
   .sidebar {
-   width: auto;
+    width: auto;
   }
   .sidebar__btn--blue {
     width: auto;

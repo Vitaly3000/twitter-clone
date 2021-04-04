@@ -8,6 +8,7 @@ import BookmarkIcon from '@material-ui/icons/BookmarkBorder';
 import ListIcon from '@material-ui/icons/ListAlt';
 import UserIcon from '@material-ui/icons/PersonOutline';
 import PencilIcon from '@material-ui/icons/CreateOutlined';
+import HouseIcon from '@material-ui/icons/HouseOutlined';
 import styles from './SideMenu.module.css';
 import { ModalBlock } from '../ModalBlock';
 import { AddTweetForm } from '../AddTweetForm/AddTweetForm';
@@ -30,8 +31,16 @@ export const SideMenu: React.FC<SideMenuProps> = (): React.ReactElement => {
       <li>
         <Link to="/home">
           <IconButton aria-label="delete" color="primary">
-            <TwitterIcon style={{ fontSize: '30px' }} color="primary" />
+            <TwitterIcon style={{ fontSize: '36px' }} color="primary" />
           </IconButton>
+        </Link>
+      </li>
+      <li>
+        <Link to="/home">
+          <IconButton className={styles['sidebar__btn']} aria-label="delete">
+            <HouseIcon className={styles['sidebar__btn-icon']} />
+            <span className={styles['sidebar__btn-text']}>Домой</span>
+          </IconButton>{' '}
         </Link>
       </li>
       <li>
