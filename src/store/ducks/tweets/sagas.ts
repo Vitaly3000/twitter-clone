@@ -20,18 +20,11 @@ export function* fetchTweetsRequest() {
     yield put(setTweetsLoadingState(LoadingState.ERROR));
   }
 }
-export function* fetchAddTweetRequest({ payload }: FetchAddTweetActionType) {
-  const data = {
-    _id: Math.random().toString(36).substring(2),
-    text: payload,
-    user: {
-      fullname: 'vitaly Web',
-      username: 'Vitaly228',
-      avatarUrl: 'https://source.unsplash.com/random',
-    },
-  };
+export function* fetchAddTweetRequest({
+  payload: text,
+}: FetchAddTweetActionType) {
   try {
-    const item: Tweet = yield call(TweetsApi.addTweet, data);
+    const item: Tweet = yield call(TweetsApi.addTweet, text);
     yield put(addTweet(item));
   } catch (error) {
     yield put(setAddFormState(AddFormState.ERROR));

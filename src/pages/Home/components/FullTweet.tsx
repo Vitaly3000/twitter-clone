@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import format from 'date-fns/format';
+import ruLang from 'date-fns/locale/ru';
 
 import {
   Avatar,
@@ -24,7 +26,12 @@ import {
   selectTweetData,
 } from '../../../store/ducks/tweet/selectors';
 const useStyles = makeStyles({
-  fullTweet: { paddingTop: 12, paddingLeft: 16, paddingRight: 16 },
+  fullTweet: {
+    paddingTop: 12,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 12,
+  },
   s: {},
   fullTweetHeader: { display: 'flex' },
   fullTweetHeaderName: {},
@@ -79,6 +86,13 @@ const useStyles = makeStyles({
     },
   },
   'tweet__btn-icon': {},
+  tweet__date: {
+    color: '#5b7083',
+    fontSize: '15px',
+    borderBottom: '1px solid rgb(235, 238, 240)',
+    paddingBottom: 16,
+    fontWeight: 400,
+  },
 });
 export const FullTweet: React.FC = (): React.ReactElement | null => {
   const params: { id: string } = useParams();
@@ -150,6 +164,19 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
                 <ShareIcon className={classes['tweet__btn-icon']} />
               </IconButton>
             </div>
+          </div>
+          <div className={classes['tweet__date']}>
+            <span>
+              {format(new Date(tweetData.createdAt), 'H:mm', {
+                locale: ruLang,
+              })}{' '}
+              ·{' '}
+            </span>
+            <span>
+              {format(new Date(tweetData.createdAt), 'dd MMM,yyyy г.', {
+                locale: ruLang,
+              })}
+            </span>
           </div>
         </div>
       </div>

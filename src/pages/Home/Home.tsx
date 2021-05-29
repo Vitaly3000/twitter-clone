@@ -53,7 +53,7 @@ export const Home: React.FC = (): React.ReactElement => {
   React.useEffect(() => {
     dispatch(fetchTweets());
     dispatch(fetchTags());
-    dispatch(fetchTweetData("6064d7f7893377145397d73c"));
+    dispatch(fetchTweetData('6064d7f7893377145397d73c'));
   }, [dispatch]);
   return (
     <section>

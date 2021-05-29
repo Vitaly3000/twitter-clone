@@ -1,16 +1,25 @@
 import React from 'react';
-import { Avatar, IconButton, Paper, makeStyles } from '@material-ui/core';
-
+import {
+  Avatar,
+  IconButton,
+  Paper,
+  makeStyles,
+  Menu,
+  MenuItem,
+} from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import RepeatIcon from '@material-ui/icons/RepeatOutlined';
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShareIcon from '@material-ui/icons/ShareOutlined';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { formatDate } from '../../utils/formatDate';
 
 interface TweetProps {
   _id: string;
   text: string;
+  createdAt: string;
   user: { username: string; fullname: string; avatarUrl: string };
 }
 const useStyles = makeStyles({
@@ -43,6 +52,7 @@ const useStyles = makeStyles({
       lineHeight: '20px',
       fontSize: '15px',
     },
+    fontSize: '16px',
     fontWeight: 700,
   },
   tweet__body: { maxWidth: '500px', width: '100%' },
@@ -87,14 +97,44 @@ const useStyles = makeStyles({
     },
   },
   'tweet__btn-icon': { fontSize: '18px' },
+  tweet__top: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '-10px',
+  },
+  'tweet__top-btn': {
+    transform: 'rotate(-90deg)',
+  },
 });
 
 export const Tweet: React.FC<TweetProps> = ({
   text,
   user,
   _id,
+  createdAt,
 }: TweetProps): React.ReactElement => {
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const history = useHistory();
+  const handleClickTweet = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ): void => {
+    event.preventDefault();
+    history.push(`/home/tweet/${_id}`);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Paper className={classes['tweet']} variant="outlined">
       <Avatar
@@ -103,12 +143,41 @@ export const Tweet: React.FC<TweetProps> = ({
         src={user.avatarUrl}
       />
       <div className={classes.tweet__body}>
-        <Link className={classes['tweetWrapper']} to={`/home/tweet/${_id}`}>
-          <div className={classes['user__name']}>
-            <b>{user.fullname}</b> <span>@{user.username + ' · '}1ч</span>
+        <a
+          onClick={handleClickTweet}
+          className={classes['tweetWrapper']}
+          href={`/home/tweet/${_id}`}>
+          <div className={classes['tweet__top']}>
+            <div className={classes['user__name']}>
+              <b>{user.fullname}</b>{' '}
+              <span>
+                @{user.username + ' · '}
+                {formatDate(new Date(createdAt))}
+              </span>
+            </div>
+            <div>
+              <IconButton
+                className={classes['tweet__top-btn']}
+                aria-label="more"
+                aria-controls="long-menu"
+                aria-haspopup="true"
+                onClick={handleClick}>
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                id="long-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}>
+                <MenuItem onClick={handleClose}>Редактировать твит</MenuItem>
+
+                <MenuItem onClick={handleClose}>Удалить твит</MenuItem>
+              </Menu>
+            </div>
           </div>
           <p className={classes['tweet__text']}>{text}</p>{' '}
-        </Link>
+        </a>
         <div className={classes['tweet__btns']}>
           <div className={classes['tweet__btn' && 'tweet__btn--blue']}>
             <IconButton>
