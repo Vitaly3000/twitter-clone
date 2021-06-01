@@ -7,17 +7,18 @@ import {
 } from './actionCreators';
 
 import { TweetsApi } from '../../../services/api/tweetsApi';
-import { AddFormState, LoadingState, Tweet } from './contracts/state';
+import { AddFormState, Tweet } from './contracts/state';
 import {
   FetchAddTweetActionType,
   TweetsActionsType,
 } from './contracts/actionsType';
+import { LoadingStatus } from '../../types';
 export function* fetchTweetsRequest() {
   try {
     const items: Tweet[] = yield call(TweetsApi.fetchTweets);
     yield put(setTweets(items));
   } catch (error) {
-    yield put(setTweetsLoadingState(LoadingState.ERROR));
+    yield put(setTweetsLoadingState(LoadingStatus.ERROR));
   }
 }
 export function* fetchAddTweetRequest({

@@ -90,7 +90,7 @@ export const Home: React.FC = (): React.ReactElement => {
             )}
           </Route>
           <Route path="/home/tweet/:id" exact component={FullTweet} />
-          <div className={classes.grayLine} />
+          
         </Paper>
 
         <div className={classes.rightSide}>

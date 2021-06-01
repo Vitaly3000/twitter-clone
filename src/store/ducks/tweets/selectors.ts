@@ -1,6 +1,7 @@
 import { RootState } from '../../store';
+import { LoadingStatus } from '../../types';
 
-import { AddFormState, LoadingState, TweetsState } from './contracts/state';
+import { AddFormState, TweetsState } from './contracts/state';
 
 export const selectTweetsState = (state: RootState): TweetsState =>
   state.tweets;
@@ -8,14 +9,14 @@ export const selectTweetsState = (state: RootState): TweetsState =>
 export const selectTweetsItems = (state: RootState): TweetsState['items'] =>
   selectTweetsState(state).items;
 
-export const selectTweetsLoadingState = (state: RootState): LoadingState =>
-  selectTweetsState(state).loadingState;
+export const selectTweetsLoadingState = (state: RootState): LoadingStatus =>
+  selectTweetsState(state).LoadingStatus;
 
 export const selectIsTweetsLoaded = (state: RootState): boolean =>
-  selectTweetsLoadingState(state) === LoadingState.LOADED;
+  selectTweetsLoadingState(state) === LoadingStatus.LOADED;
 
 export const selectIsTweetsLoading = (state: RootState): boolean =>
-  selectTweetsLoadingState(state) === LoadingState.LOADING;
+  selectTweetsLoadingState(state) === LoadingStatus.LOADING;
 
 export const selectAddTweetState = (state: RootState): AddFormState =>
   selectTweetsState(state).addFormState;

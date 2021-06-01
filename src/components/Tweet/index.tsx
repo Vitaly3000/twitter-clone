@@ -13,7 +13,7 @@ import RepeatIcon from '@material-ui/icons/RepeatOutlined';
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShareIcon from '@material-ui/icons/ShareOutlined';
 import classnames from 'classnames';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
 
 interface TweetProps {
@@ -106,6 +106,12 @@ const useStyles = makeStyles({
   'tweet__top-btn': {
     transform: 'rotate(-90deg)',
   },
+  'tweet__top-btn-menu': {
+    '& .MuiList-root': {
+      border: '1px solid rgba(0, 0, 0, 0.12);',
+    },
+  },
+  tweetPopupMenu: {},
 });
 
 export const Tweet: React.FC<TweetProps> = ({
@@ -115,7 +121,6 @@ export const Tweet: React.FC<TweetProps> = ({
   createdAt,
 }: TweetProps): React.ReactElement => {
   const classes = useStyles();
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
@@ -155,7 +160,7 @@ export const Tweet: React.FC<TweetProps> = ({
                 {formatDate(new Date(createdAt))}
               </span>
             </div>
-            <div>
+            <div className={classes.tweetPopupMenu}>
               <IconButton
                 className={classes['tweet__top-btn']}
                 aria-label="more"
@@ -165,13 +170,13 @@ export const Tweet: React.FC<TweetProps> = ({
                 <MoreVertIcon />
               </IconButton>
               <Menu
+                className={classes['tweet__top-btn-menu']}
                 id="long-menu"
                 anchorEl={anchorEl}
                 keepMounted
                 open={open}
                 onClose={handleClose}>
                 <MenuItem onClick={handleClose}>Редактировать твит</MenuItem>
-
                 <MenuItem onClick={handleClose}>Удалить твит</MenuItem>
               </Menu>
             </div>

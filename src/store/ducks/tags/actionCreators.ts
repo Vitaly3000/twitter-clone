@@ -1,10 +1,11 @@
+import { LoadingStatus } from '../../types';
 import {
   FetchTagsActionInterface,
   SetTagsActionInterface,
   SetTagsLoadingStateActionInterface,
   TagsActionsType,
 } from './contracts/actionTypes';
-import { LoadingState, TagsState } from './contracts/state';
+import { TagsState } from './contracts/state';
 
 export const setTags = (
   payload: TagsState['items'],
@@ -13,7 +14,7 @@ export const setTags = (
   payload,
 });
 export const setTagsLoadingState = (
-  payload: LoadingState,
+  payload: LoadingStatus,
 ): SetTagsLoadingStateActionInterface => ({
   type: TagsActionsType.SET_LOADING_STATE,
   payload,

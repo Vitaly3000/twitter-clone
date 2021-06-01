@@ -1,4 +1,4 @@
-import { LoadingState } from '../tweets/contracts/state';
+import { LoadingStatus } from '../../types';
 import {
   FetchTweetDataActionInterface,
   SetTweetDataActionInterface,
@@ -14,7 +14,7 @@ export const setTweetData = (
   payload,
 });
 export const setTweetLoadingState = (
-  payload: LoadingState,
+  payload: LoadingStatus,
 ): SetTweetLoadingStateActionInterface => ({
   type: TweetActionsType.SET_LOADING_STATE,
   payload,
