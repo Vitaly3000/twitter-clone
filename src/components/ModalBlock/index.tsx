@@ -34,7 +34,7 @@ export const ModalBlock: React.FC<ModalProps> = ({
         </IconButton>
         {title}
       </DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent>{ children}</DialogContent>
     </Dialog>
   );
 };

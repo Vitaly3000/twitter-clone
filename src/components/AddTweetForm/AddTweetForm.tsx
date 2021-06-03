@@ -64,6 +64,7 @@ const useStyles = makeStyles({
 });
 interface AddTweetFormProps {
   maxRows?: number;
+  onclose?: () => void;
 }
 const MAX_LENGTH = 280;
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({

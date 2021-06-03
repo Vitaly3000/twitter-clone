@@ -1,25 +1,12 @@
 import React from 'react';
-import {
-  Avatar,
-  Button,
-  Divider,
-  makeStyles,
-  Paper,
-  InputAdornment,
-} from '@material-ui/core';
+import { Divider, makeStyles, Paper } from '@material-ui/core';
 
-import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
-
-import SearchIcon from '@material-ui/icons/Search';
-
-import theme from '../../theme';
-
-import { SearchTextField } from '../../components/SearchTextField/SearchTextField';
+import theme from '../../../theme';
 
 import {
   selectIsTagsLoaded,
   selectTagsItems,
-} from '../../store/ducks/tags/selectors';
+} from '../../../store/ducks/tags/selectors';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -79,17 +66,9 @@ const useStyles = makeStyles({
     },
     marginLeft: 'auto',
   },
-  '@media(max-width: 1000px)': {
-    addForm: {
-      display: 'none',
-    },
-    rightSide: {
-      display: 'none',
-    },
-  },
 });
-interface RightSideProps {}
-export const Tags: React.FC<RightSideProps> = (): React.ReactElement | null => {
+interface TagsProps {}
+export const Tags: React.FC<TagsProps> = (): React.ReactElement | null => {
   const classes = useStyles();
 
   const items = useSelector(selectTagsItems);
@@ -99,18 +78,6 @@ export const Tags: React.FC<RightSideProps> = (): React.ReactElement | null => {
   }
   return (
     <>
-      <SearchTextField
-        variant="outlined"
-        placeholder="Поиск по Твиттеру"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-        fullWidth
-      />
       <Paper className={classes.rightSideBlock}>
         <Paper className={classes.rightSideBlockHeader}>
           <b>Актуальные темы</b>
@@ -129,34 +96,6 @@ export const Tags: React.FC<RightSideProps> = (): React.ReactElement | null => {
             <Divider />
           </React.Fragment>
         ))}
-      </Paper>
-      <Paper className={classes.rightSideBlock}>
-        <Paper className={classes.rightSideBlockHeader}>
-          <b>Кого читать</b>
-        </Paper>
-        <Divider />
-
-        <div className={classes.rightSideBlockItem}>
-          <div className={classes.rightSideBlockUser}>
-            <Avatar
-              className={classes.rightSideBlockUserAvatar}
-              src="https://images.unsplash.com/photo-1568990545613-aa37e9353eb6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
-            />
-
-            <div className="rightSideBlockUserName">
-              <div>Alex</div>
-              <span>@noName</span>
-            </div>
-            <Button
-              className={classes.rightSideBlockBtnFollow}
-              variant="outlined"
-              color="primary">
-              <PersonAddIcon />
-              <span>Подписаться</span>
-            </Button>
-          </div>
-        </div>
-        <Divider />
       </Paper>
     </>
   );

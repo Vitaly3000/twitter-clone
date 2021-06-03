@@ -16,30 +16,21 @@ import {
 } from '../../store/ducks/tweets/selectors';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { fetchTags } from '../../store/ducks/tags/actionCreators';
-import { Tags } from '../../components/Tags/Tags';
+
 import { Route } from 'react-router';
 import { BackButtom } from '../../components/BackButtom/BackButtom';
 import { FullTweet } from './components/FullTweet';
 import { fetchTweetData } from '../../store/ducks/tweet/actionCreators';
+import { RightSide } from '../../components/RightSide/RightSide';
 
 const useStyles = makeStyles({
   grayLine: {
     height: 12,
     backgroundColor: '#E6ECF0',
   },
-  rightSide: {
-    position: 'sticky',
-    top: '5px',
-    maxWidth: '350px',
-    width: '100%',
-    marginLeft: '15px',
-  },
 
   '@media(max-width: 1000px)': {
     addForm: {
-      display: 'none',
-    },
-    rightSide: {
       display: 'none',
     },
   },
@@ -90,12 +81,9 @@ export const Home: React.FC = (): React.ReactElement => {
             )}
           </Route>
           <Route path="/home/tweet/:id" exact component={FullTweet} />
-          
         </Paper>
 
-        <div className={classes.rightSide}>
-          <Tags />
-        </div>
+        <RightSide />
       </div>
     </section>
   );
