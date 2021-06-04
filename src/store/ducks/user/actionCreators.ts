@@ -3,6 +3,7 @@ import { RegisterFormProps } from '../../../pages/SignIn/components/RegisterModa
 import {
   FetchSignInActionInterface,
   FetchSignUpActionInterface,
+  FetchUserDataActionInterface,
   SetUserDataActionInterface,
   SetUserLoadingStateActionInterface,
   UserActionsType,
@@ -26,6 +27,10 @@ export const fetchSignUp = (
 ): FetchSignUpActionInterface => ({
   type: UserActionsType.FETCH_SIGN_UP,
   payload,
+});
+
+export const fetchUserData = (): FetchUserDataActionInterface => ({
+  type: UserActionsType.FETCH_USER_DATA,
 });
 export const setUserLoadingStatus = (
   payload: UserState['status'],

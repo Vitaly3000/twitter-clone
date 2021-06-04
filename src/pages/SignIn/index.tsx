@@ -34,8 +34,8 @@ export const SignIn: React.FC = (): React.ReactElement => {
       <section className={styles['right-side']}>
         <div className={styles['right-side__content']}>
           <svg
-          fill='rgba(29, 161, 242, 1)'
-          height='30px'
+            fill="rgba(29, 161, 242, 1)"
+            height="30px"
             viewBox="0 0 24 24"
             className="r-jwli3a r-4qtqp9 r-yyyyoo r-rxcuwo r-1777fci r-m327ed r-dnmrzs r-494qqr r-bnwqim r-1plcrui r-lrvibr">
             <g>
@@ -67,10 +67,12 @@ export const SignIn: React.FC = (): React.ReactElement => {
               </Button>
             </div>
           </div>
+
           <LoginModal
             open={visibleModal === 'signIn'}
             onClose={handleCloseModal}
           />
+
           <RegisterModal
             open={visibleModal === 'signUp'}
             onClose={handleCloseModal}

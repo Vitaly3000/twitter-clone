@@ -57,75 +57,64 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
   }, [loadingStatus]);
   return (
-    <Notification>
-      {(callback) => {
-        openNotificationRef.current = callback;
-        return (
-          <ModalBlock
-            onClose={onClose}
-            visible={open}
-            title={'Войти в Твиттер'}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <FormControl component="fieldset" fullWidth>
-                <FormGroup aria-label="position" row>
-                  <Controller
-                    name="email"
-                    control={control}
-                    defaultValue=""
-                    render={({ field: { onChange, value } }) => (
-                      <TextField
-                        name="email"
-                        autoFocus
-                        value={value}
-                        margin="dense"
-                        id="email"
-                        label="Логин или email"
-                        
-                        fullWidth
-                        error={!!errors.email}
-                        helperText={errors.email?.message}
-                        InputLabelProps={{ shrink: true }}
-                        variant="filled"
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="password"
-                    control={control}
-                    defaultValue=""
-                    render={({ field: { onChange, value } }) => (
-                      <TextField
-                        value={value}
-                        onChange={onChange}
-                        error={!!errors.password}
-                        helperText={errors.password?.message}
-                        name="password"
-                        style={{ marginBottom: '25px' }}
-                        margin="dense"
-                        id="password"
-                        label="Пароль"
-                        type="password"
-                        fullWidth
-                        variant="filled"
-                      />
-                    )}
-                  />
-                  <Button
-                    disabled={loadingStatus === LoadingStatus.LOADING}
-                    style={{ marginBottom: '20px' }}
-                    fullWidth
-                    variant="contained"
-                    type="submit"
-                    color="primary">
-                    Войти
-                  </Button>
-                </FormGroup>
-              </FormControl>
-            </form>
-          </ModalBlock>
-        );
-      }}
-    </Notification>
+    <ModalBlock onClose={onClose} visible={open} title={'Войти в Твиттер'}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl component="fieldset" fullWidth>
+          <FormGroup aria-label="position" row>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  name="email"
+                  autoFocus
+                  value={value}
+                  margin="dense"
+                  id="email"
+                  label="Логин или email"
+                  fullWidth
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  InputLabelProps={{ shrink: true }}
+                  variant="filled"
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  value={value}
+                  onChange={onChange}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                  name="password"
+                  style={{ marginBottom: '25px' }}
+                  margin="dense"
+                  id="password"
+                  label="Пароль"
+                  type="password"
+                  fullWidth
+                  variant="filled"
+                />
+              )}
+            />
+            <Button
+              disabled={loadingStatus === LoadingStatus.LOADING}
+              style={{ marginBottom: '20px' }}
+              fullWidth
+              variant="contained"
+              type="submit"
+              color="primary">
+              Войти
+            </Button>
+          </FormGroup>
+        </FormControl>
+      </form>
+    </ModalBlock>
   );
 };

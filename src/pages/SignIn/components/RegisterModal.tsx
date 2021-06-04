@@ -67,143 +67,136 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
     }
   }, [loadingStatus]);
   return (
-    <Notification>
-      {(callback) => {
-        openNotificationRef.current = callback;
-        return (
-          <ModalBlock
-            onClose={onClose}
-            visible={open}
-            title={'Создайте учетную запись'}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <FormControl component="fieldset" fullWidth>
-                <FormGroup aria-label="position" row>
-                  <Controller
-                    name="email"
-                    control={control}
-                    defaultValue=""
-                    render={({ field: { onChange, value } }) => (
-                      <TextField
-                        style={{ marginBottom: '25px' }}
-                        margin="dense"
-                        id="email"
-                        label="E-mail"
-                        type="email"
-                        name="email"
-                        value={value}
-                        fullWidth
-                        autoFocus
-                        error={!!errors.email}
-                        helperText={errors.email?.message}
-                        InputLabelProps={{ shrink: true }}
-                        variant="filled"
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="username"
-                    control={control}
-                    defaultValue=""
-                    render={({ field: { onChange, value } }) => (
-                      <TextField
-                        style={{ marginBottom: '25px' }}
-                        margin="dense"
-                        id="username"
-                        name="username"
-                        label="Логин"
-                        type="text"
-                        value={value}
-                        fullWidth
-                        InputLabelProps={{ shrink: true }}
-                        error={!!errors.username}
-                        helperText={errors.username?.message}
-                        variant="filled"
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="fullname"
-                    control={control}
-                    defaultValue=""
-                    render={({ field: { onChange, value } }) => (
-                      <TextField
-                        style={{ marginBottom: '25px' }}
-                        margin="dense"
-                        id="fullname"
-                        name="fullname"
-                        label="Ваше имя"
-                        type="text"
-                        value={value}
-                        fullWidth
-                        InputLabelProps={{ shrink: true }}
-                        error={!!errors.fullname}
-                        helperText={errors.fullname?.message}
-                        variant="filled"
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="password"
-                    control={control}
-                    defaultValue=""
-                    render={({ field: { onChange, value } }) => (
-                      <TextField
-                        style={{ marginBottom: '25px' }}
-                        margin="dense"
-                        id="password"
-                        label="Пароль"
-                        type="password"
-                        fullWidth
-                        variant="filled"
-                        name="password"
-                        value={value}
-                        error={!!errors.password}
-                        helperText={errors.password?.message}
-                        onChange={onChange}
-                        InputLabelProps={{ shrink: true }}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="password2"
-                    control={control}
-                    defaultValue=""
-                    render={({ field: { onChange, value } }) => (
-                      <TextField
-                        style={{ marginBottom: '25px' }}
-                        margin="dense"
-                        id="password2"
-                        label="Повторите пароль"
-                        type="password"
-                        fullWidth
-                        variant="filled"
-                        name="password2"
-                        value={value}
-                        error={!!errors.password2}
-                        helperText={errors.password2?.message}
-                        onChange={onChange}
-                        InputLabelProps={{ shrink: true }}
-                      />
-                    )}
-                  />
-                  <Button
-                    disabled={loadingStatus === LoadingStatus.LOADING}
-                    style={{ marginBottom: '20px' }}
-                    fullWidth
-                    variant="contained"
-                    type="submit"
-                    color="primary">
-                    Зарегистрироваться
-                  </Button>
-                </FormGroup>
-              </FormControl>
-            </form>
-          </ModalBlock>
-        );
-      }}
-    </Notification>
+    <ModalBlock
+      onClose={onClose}
+      visible={open}
+      title={'Создайте учетную запись'}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl component="fieldset" fullWidth>
+          <FormGroup aria-label="position" row>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  style={{ marginBottom: '25px' }}
+                  margin="dense"
+                  id="email"
+                  label="E-mail"
+                  type="email"
+                  name="email"
+                  value={value}
+                  fullWidth
+                  autoFocus
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  InputLabelProps={{ shrink: true }}
+                  variant="filled"
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Controller
+              name="username"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  style={{ marginBottom: '25px' }}
+                  margin="dense"
+                  id="username"
+                  name="username"
+                  label="Логин"
+                  type="text"
+                  value={value}
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  error={!!errors.username}
+                  helperText={errors.username?.message}
+                  variant="filled"
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Controller
+              name="fullname"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  style={{ marginBottom: '25px' }}
+                  margin="dense"
+                  id="fullname"
+                  name="fullname"
+                  label="Ваше имя"
+                  type="text"
+                  value={value}
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  error={!!errors.fullname}
+                  helperText={errors.fullname?.message}
+                  variant="filled"
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  style={{ marginBottom: '25px' }}
+                  margin="dense"
+                  id="password"
+                  label="Пароль"
+                  type="password"
+                  fullWidth
+                  variant="filled"
+                  name="password"
+                  value={value}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                  onChange={onChange}
+                  InputLabelProps={{ shrink: true }}
+                />
+              )}
+            />
+            <Controller
+              name="password2"
+              control={control}
+              defaultValue=""
+              render={({ field: { onChange, value } }) => (
+                <TextField
+                  style={{ marginBottom: '25px' }}
+                  margin="dense"
+                  id="password2"
+                  label="Повторите пароль"
+                  type="password"
+                  fullWidth
+                  variant="filled"
+                  name="password2"
+                  value={value}
+                  error={!!errors.password2}
+                  helperText={errors.password2?.message}
+                  onChange={onChange}
+                  InputLabelProps={{ shrink: true }}
+                />
+              )}
+            />
+            <Button
+              disabled={loadingStatus === LoadingStatus.LOADING}
+              style={{ marginBottom: '20px' }}
+              fullWidth
+              variant="contained"
+              type="submit"
+              color="primary">
+              Зарегистрироваться
+            </Button>
+          </FormGroup>
+        </FormControl>
+      </form>
+    </ModalBlock>
   );
 };
