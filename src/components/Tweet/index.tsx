@@ -15,13 +15,10 @@ import ShareIcon from '@material-ui/icons/ShareOutlined';
 import classnames from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
+import { ImageList } from '../ImageList/ImageList';
+import { useDispatch } from 'react-redux';
+import { removeTweet } from '../../store/ducks/tweets/actionCreators';
 
-interface TweetProps {
-  _id: string;
-  text: string;
-  createdAt: string;
-  user: { username: string; fullname: string; avatarUrl: string };
-}
 const useStyles = makeStyles({
   tweet: {
     borderRight: 'none',
@@ -113,31 +110,45 @@ const useStyles = makeStyles({
   },
   tweetPopupMenu: {},
 });
-
+interface TweetProps {
+  _id: string;
+  text: string;
+  createdAt: string;
+  images?: string[];
+  user: { username: string; fullname: string; avatarUrl: string };
+}
 export const Tweet: React.FC<TweetProps> = ({
   text,
   user,
   _id,
   createdAt,
+  images,
 }: TweetProps): React.ReactElement => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
+  const dispatch = useDispatch();
   const handleClickTweet = (
     event: React.MouseEvent<HTMLAnchorElement>,
   ): void => {
     event.preventDefault();
     history.push(`/home/tweet/${_id}`);
   };
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
     event.stopPropagation();
     event.preventDefault();
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent<HTMLElement>): void => {
+    event.stopPropagation();
+    event.preventDefault();
     setAnchorEl(null);
+  };
+  const handleRemove = (event: React.MouseEvent<HTMLElement>): void => {
+    handleClose(event);
+    dispatch(removeTweet(_id));
   };
 
   return (
@@ -177,11 +188,12 @@ export const Tweet: React.FC<TweetProps> = ({
                 open={open}
                 onClose={handleClose}>
                 <MenuItem onClick={handleClose}>Редактировать твит</MenuItem>
-                <MenuItem onClick={handleClose}>Удалить твит</MenuItem>
+                <MenuItem onClick={handleRemove}>Удалить твит</MenuItem>
               </Menu>
             </div>
           </div>
-          <p className={classes['tweet__text']}>{text}</p>{' '}
+          <p className={classes['tweet__text']}>{text}</p>
+          {images && <ImageList images={images} />}
         </a>
         <div className={classes['tweet__btns']}>
           <div className={classes['tweet__btn' && 'tweet__btn--blue']}>

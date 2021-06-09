@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import format from 'date-fns/format';
 import ruLang from 'date-fns/locale/ru';
-
+import mediumZoom from 'medium-zoom';
 import {
   Avatar,
   IconButton,
@@ -25,6 +25,7 @@ import {
   selectIsTweetLoading,
   selectTweetData,
 } from '../../../store/ducks/tweet/selectors';
+import { ImageList } from '../../../components/ImageList/ImageList';
 const useStyles = makeStyles({
   fullTweet: {
     paddingTop: 12,
@@ -51,14 +52,16 @@ const useStyles = makeStyles({
     fontSize: '23px',
     wordWrap: 'break-word',
     width: '100%',
-    paddingBottom: 16,
-    borderBottom: '1px solid rgb(235, 238, 240)',
+    paddingBottom: 5,
+
     margin: '16px 0 0',
   },
   fullTweetBtns: {
     padding: '5px 0',
     display: 'flex',
+    marginTop: 5,
     justifyContent: 'space-between',
+    borderTop: '1px solid rgb(235, 238, 240)',
   },
   tweet__btn: {
     fontSize: '13px',
@@ -105,10 +108,16 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
     if (id) {
       dispatch(fetchTweetData(id));
     }
+
     return () => {
       dispatch(setTweetData(undefined));
     };
   }, [dispatch, id]);
+  useEffect(() => {
+    if (!isLoading) {
+      mediumZoom('.tweetImages img');
+    }
+  }, [isLoading]);
   if (isLoading) {
     return (
       <div
@@ -137,7 +146,10 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
           </div>
         </div>
         <div className={classes.fullTweetBody}>
-          <p className={classes['fullTweetText']}>{tweetData.text}</p>{' '}
+          <p className={classes['fullTweetText']}>{tweetData.text} </p>
+          <div className="tweetImages">
+            {tweetData.images && <ImageList images={tweetData.images} />}{' '}
+          </div>
           <div className={classes['fullTweetBtns']}>
             <div className={classes['tweet__btn' && 'tweet__btn--blue']}>
               <IconButton>

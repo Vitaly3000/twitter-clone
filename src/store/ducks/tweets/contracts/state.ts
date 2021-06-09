@@ -9,6 +9,7 @@ export interface Tweet {
   _id: string;
   createdAt: string;
   text: string;
+  images?: [];
   user: { fullname: string; username: string; avatarUrl: string };
 }
 

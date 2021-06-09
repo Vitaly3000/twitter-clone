@@ -11,10 +11,15 @@ import Alert from '@material-ui/lab/Alert';
 import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import GifIcon from '@material-ui/icons/GifOutlined';
 import ImageIcon from '@material-ui/icons/ImageOutlined';
-import { fetchAddTweet } from '../../store/ducks/tweets/actionCreators';
+import {
+  fetchAddTweet,
+  setAddFormState,
+} from '../../store/ducks/tweets/actionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAddTweetState } from '../../store/ducks/tweets/selectors';
 import { AddFormState } from '../../store/ducks/tweets/contracts/state';
+import { UploadImages } from '../UploadImages.tsx/UploadImages';
+import { uploadImage } from '../../utils/uploadImage';
 const useStyles = makeStyles({
   addTweetForm: { margin: '10px 16px' },
   addTweetFormWrapper: {
@@ -67,11 +72,18 @@ interface AddTweetFormProps {
   onclose?: () => void;
 }
 const MAX_LENGTH = 280;
+
+export interface ImageObj {
+  blobUrl: string;
+  file: File;
+}
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
 }): React.ReactElement => {
   const classes = useStyles();
   const [text, setText] = React.useState<string>('');
+  const [images, setImages] = React.useState<ImageObj[]>([]);
+
   const textLimitPercent = (text.length / MAX_LENGTH) * 100;
   const textCount = MAX_LENGTH - text.length;
   const handleChangeTextarea = (
@@ -84,9 +96,23 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   const addTweetState = useSelector(selectAddTweetState);
 
   const dispatch = useDispatch();
-  const handleClickAddTweet = (): void => {
-    dispatch(fetchAddTweet(text));
+
+  const handleClickAddTweet = async (): Promise<void> => {
+    let result = [];
+    dispatch(setAddFormState(AddFormState.LOADING));
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i].file;
+      const { url } = await uploadImage(file);
+      result.push(url);
+    }
+    dispatch(
+      fetchAddTweet({
+        text,
+        images: result,
+      }),
+    );
     setText('');
+    setImages([]);
   };
 
   return (
@@ -107,15 +133,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
           />
           <div className={classes['addTweetFormBottom']}>
             <div className={classes['addTweetFormBottomBtns']}>
-              <IconButton color="primary">
-                <ImageIcon />
-              </IconButton>
-              <IconButton color="primary">
-                <GifIcon />
-              </IconButton>
-              <IconButton color="primary">
-                <EmojiIcon />
-              </IconButton>
+              <UploadImages images={images} onChangeImages={setImages} />
             </div>
             <div className={classes.addTweetFormBottomRight}>
               {text && (
