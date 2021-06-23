@@ -26,6 +26,7 @@ import {
   selectTweetData,
 } from '../../../store/ducks/tweet/selectors';
 import { ImageList } from '../../../components/ImageList/ImageList';
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
   fullTweet: {
     paddingTop: 12,
@@ -39,6 +40,7 @@ const useStyles = makeStyles({
   userName: {
     marginLeft: 10,
     fontWeight: 700,
+    color:'#0f1419',
     '& span': {
       color: '#5b7083',
       fontWeight: 400,
@@ -135,15 +137,13 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
     return (
       <div className={classes['fullTweet']}>
         <div className={classes['fullTweetHeader']}>
-          <Avatar
-            className={classes['s']}
-            alt="Аватар пользователя"
-            src={tweetData.user.avatarUrl}
-          />
-          <div className={classes['userName']}>
-            <div>{tweetData.user.fullname}</div>
-            <span>@{tweetData.user.username}</span>
-          </div>
+          <Avatar className={classes['s']} alt="Аватар пользователя" />
+          <Link to={`/user/${tweetData.user._id}`}>
+            <div className={classes['userName']}>
+              <div>{tweetData.user.fullname}</div>
+              <span>@{tweetData.user.username}</span>
+            </div>
+          </Link>
         </div>
         <div className={classes.fullTweetBody}>
           <p className={classes['fullTweetText']}>{tweetData.text} </p>

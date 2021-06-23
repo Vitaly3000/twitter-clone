@@ -1,4 +1,5 @@
 import { LoadingStatus } from '../../../types';
+import { User } from '../../user/contracts/state';
 
 export enum AddFormState {
   ERROR = 'ERROR',
@@ -10,7 +11,7 @@ export interface Tweet {
   createdAt: string;
   text: string;
   images?: [];
-  user: { fullname: string; username: string; avatarUrl: string };
+  user: User;
 }
 
 export interface TweetsState {

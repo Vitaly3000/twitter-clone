@@ -18,6 +18,7 @@ import { formatDate } from '../../utils/formatDate';
 import { ImageList } from '../ImageList/ImageList';
 import { useDispatch } from 'react-redux';
 import { removeTweet } from '../../store/ducks/tweets/actionCreators';
+import { User } from '../../store/ducks/user/contracts/state';
 
 const useStyles = makeStyles({
   tweet: {
@@ -115,7 +116,7 @@ interface TweetProps {
   text: string;
   createdAt: string;
   images?: string[];
-  user: { username: string; fullname: string; avatarUrl: string };
+  user: User;
 }
 export const Tweet: React.FC<TweetProps> = ({
   text,
@@ -153,11 +154,7 @@ export const Tweet: React.FC<TweetProps> = ({
 
   return (
     <Paper className={classes['tweet']} variant="outlined">
-      <Avatar
-        className={classes['user__avatar']}
-        alt="Аватар пользователя"
-        src={user.avatarUrl}
-      />
+      <Avatar className={classes['user__avatar']} alt="Аватар пользователя" />
       <div className={classes.tweet__body}>
         <a
           onClick={handleClickTweet}
