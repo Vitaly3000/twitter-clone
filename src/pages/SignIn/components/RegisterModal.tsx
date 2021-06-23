@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Color } from '@material-ui/lab/Alert';
 import { fetchSignUp } from '../../../store/ducks/user/actionCreators';
 import { selectUserStatus } from '../../../store/ducks/user/selectors';
-import { Notification } from '../../../components/Notification.tsx/Notification';
+
 import { LoadingStatus } from '../../../store/types';
 
 interface RegisterModalProps {

@@ -1,8 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, useHistory } from 'react-router';
+import { ActivateUser } from './pages/ActivateUser/ActivateUser';
+
 import { Home } from './pages/Home/Home';
+import { Layout } from './pages/Layout/Layout';
 import { SignIn } from './pages/SignIn';
+import { UserPage } from './pages/UserPage/UserPage';
 import { fetchUserData } from './store/ducks/user/actionCreators';
 
 import { selectIsAuth, selectUserStatus } from './store/ducks/user/selectors';
@@ -20,11 +24,11 @@ function App() {
 
   React.useEffect(() => {
     dispatch(fetchUserData());
-  }, []);
+  }, [dispatch]);
   React.useEffect(() => {
     if (!isAuth && isReady) {
       history.push('/signin');
-    }else {
+    } else if (history.location.pathname === '/') {
       history.push('/home');
     }
   }, [isAuth, isReady]);
@@ -53,16 +57,13 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/signin" component={SignIn} />
-        <Route path="/" component={Home} />
-      </Switch>
 
-      <footer
-        style={{
-          textAlign: 'center',
-          marginTop: '20px',
-        }}>
-        <i>Twitter Clone ©2021 Created by Vitaly</i>
-      </footer>
+        <Layout>
+          <Route path="/home" component={Home} />
+          <Route path="/user/:name" component={UserPage} />
+          <Route path="/user/activate/:hash" component={ActivateUser} />
+        </Layout>
+      </Switch>
     </div>
   );
 }

@@ -8,6 +8,10 @@ interface ResponseApi {
 }
 
 export const AuthApi = {
+  async verify(hash: string): Promise<ResponseApi> {
+    const { data } = await axios.get<ResponseApi>('/auth/verify?hash=' + hash);
+    return data;
+  },
   async signIn(postData: LoginFormProps): Promise<ResponseApi> {
     const { data } = await axios.post<ResponseApi>('/auth/login', {
       username: postData.email,
@@ -29,6 +33,8 @@ export const AuthApi = {
     const { data } = await axios.get<ResponseApi>('/users/me');
     return data;
   },
+  async getUserInfo(userId: string): Promise<ResponseApi> {
+    const { data } = await axios.get<ResponseApi>('/users/' + userId);
+    return data;
+  },
 };
-//@ts-ignore
-window.AuthApi = AuthApi;

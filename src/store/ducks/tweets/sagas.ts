@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   addTweet,
-  removeTweet,
   setAddFormState,
   setTweets,
   setTweetsLoadingState,
@@ -17,7 +16,11 @@ import {
 import { LoadingStatus } from '../../types';
 export function* fetchTweetsRequest() {
   try {
-    const items: Tweet[] = yield call(TweetsApi.fetchTweets);
+    const pathname = window.location.pathname;
+    const userId = pathname.includes('/user')
+      ? pathname.split('/').pop()
+      : undefined;
+    const items: Tweet[] = yield call(TweetsApi.fetchTweets, userId);
     yield put(setTweets(items));
   } catch (error) {
     yield put(setTweetsLoadingState(LoadingStatus.ERROR));

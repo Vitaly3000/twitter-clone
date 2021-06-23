@@ -8,7 +8,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { Notification } from '../../../components/Notification.tsx/Notification';
+
 import { Color } from '@material-ui/lab/Alert';
 import { fetchSignIn } from '../../../store/ducks/user/actionCreators';
 import { selectUserStatus } from '../../../store/ducks/user/selectors';

@@ -1,19 +1,4 @@
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
 
-.tweets__wrapper {
-  border-radius: 0;
-  height: 100vh;
-  border-top: none;
-  border-bottom: none;
-  width: 100%;
-  max-width: 600px;
-}
 .tweets__header {
   display: flex;
   align-items: center;
@@ -32,10 +17,4 @@
   font-weight: 800;
   font-size: 20px;
   line-height: 24px;
-}
-
-@media screen and (max-width: 1000px) {
-  .rightSide {
-    display: none;
-  }
 }

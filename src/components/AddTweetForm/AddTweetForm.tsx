@@ -8,9 +8,7 @@ import {
 } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
-import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
-import GifIcon from '@material-ui/icons/GifOutlined';
-import ImageIcon from '@material-ui/icons/ImageOutlined';
+
 import {
   fetchAddTweet,
   setAddFormState,
@@ -119,7 +117,6 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
     <div className={classes.addTweetForm}>
       <div className={classes.addTweetFormWrapper}>
         <Avatar
-          src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzd8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
           alt="Аватар пользователя"
           className={classes.addTweetFormAvatar}
         />

@@ -8,7 +8,6 @@ interface UploadImageReturnProps {
 export const uploadImage = async (
   image: File,
 ): Promise<UploadImageReturnProps> => {
-  let req = new XMLHttpRequest();
   const formData = new FormData();
   formData.append('image', image);
   const { data } = await axios.post('/upload', formData, {

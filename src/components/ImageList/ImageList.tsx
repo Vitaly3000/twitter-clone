@@ -1,7 +1,7 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Clear';
-import { ImageObj } from '../AddTweetForm/AddTweetForm';
+
 import makeStyles from '@material-ui/core/styles/makeStyles';
 const useStyles = makeStyles({
   imagesList: {

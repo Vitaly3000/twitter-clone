@@ -6,6 +6,7 @@ import {
   FetchUserDataActionInterface,
   SetUserDataActionInterface,
   SetUserLoadingStateActionInterface,
+  SignOutActionInterface,
   UserActionsType,
 } from './contracts/actionsType';
 import { UserState } from './contracts/state';
@@ -21,6 +22,9 @@ export const fetchSignIn = (
 ): FetchSignInActionInterface => ({
   type: UserActionsType.FETCH_SIGN_IN,
   payload,
+});
+export const signOut = (): SignOutActionInterface => ({
+  type: UserActionsType.SIGN_OUT,
 });
 export const fetchSignUp = (
   payload: RegisterFormProps,

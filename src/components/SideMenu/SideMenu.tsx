@@ -13,19 +13,23 @@ import styles from './SideMenu.module.css';
 import { ModalBlock } from '../ModalBlock';
 import { AddTweetForm } from '../AddTweetForm/AddTweetForm';
 import { Link } from 'react-router-dom';
+import { UserSideProfile } from '../UserSideProfile/UserSideProfile';
+import { selectUserData } from '../../store/ducks/user/selectors';
+import { useSelector } from 'react-redux';
 
 interface SideMenuProps {}
 export const SideMenu: React.FC<SideMenuProps> = (): React.ReactElement => {
-  const [
-    visibleAddTweetModal,
-    setVisibleAddTweetModal,
-  ] = React.useState<boolean>(false);
+  const [visibleAddTweetModal, setVisibleAddTweetModal] =
+    React.useState<boolean>(false);
   const handleOpenAddTweetModal = (): void => {
     setVisibleAddTweetModal(true);
   };
   const onCloseAddTweetModal = (): void => {
     setVisibleAddTweetModal(false);
   };
+  const userData = useSelector(selectUserData, () => {
+    return true;
+  });
   return (
     <ul style={{ padding: 0 }} className={styles['sidebar']}>
       <li>
@@ -62,25 +66,32 @@ export const SideMenu: React.FC<SideMenuProps> = (): React.ReactElement => {
         </IconButton>
       </li>
       <li>
-        <IconButton
-          color="primary"
-          className={styles['sidebar__btn']}
-          aria-label="delete">
-          <BookmarkIcon className={styles['sidebar__btn-icon']} />
-          <span className={styles['sidebar__btn-text']}>Закладки</span>
-        </IconButton>
+        {' '}
+        <Link to={`/bookmarks/`}>
+          <IconButton
+            color="primary"
+            className={styles['sidebar__btn']}
+            aria-label="delete">
+            <BookmarkIcon className={styles['sidebar__btn-icon']} />
+            <span className={styles['sidebar__btn-text']}>Закладки</span>
+          </IconButton>{' '}
+        </Link>
       </li>
       <li>
-        <IconButton className={styles['sidebar__btn']} aria-label="delete">
-          <ListIcon className={styles['sidebar__btn-icon']} />
-          <span className={styles['sidebar__btn-text']}>Список</span>
-        </IconButton>
+        <Link to={`/list/`}>
+          <IconButton className={styles['sidebar__btn']} aria-label="delete">
+            <ListIcon className={styles['sidebar__btn-icon']} />
+            <span className={styles['sidebar__btn-text']}>Список</span>
+          </IconButton>
+        </Link>
       </li>
       <li>
-        <IconButton className={styles['sidebar__btn']} aria-label="delete">
-          <UserIcon className={styles['sidebar__btn-icon']} />
-          <span className={styles['sidebar__btn-text']}>Профиль</span>
-        </IconButton>
+        <Link to={`/user/${userData?._id}`}>
+          <IconButton className={styles['sidebar__btn']} aria-label="delete">
+            <UserIcon className={styles['sidebar__btn-icon']} />
+            <span className={styles['sidebar__btn-text']}>Профиль</span>
+          </IconButton>
+        </Link>
       </li>
       <li>
         <Button
@@ -100,6 +111,10 @@ export const SideMenu: React.FC<SideMenuProps> = (): React.ReactElement => {
           </div>
         </ModalBlock>
       </li>
+
+      <div className={styles.UserSideProfile}>
+        <UserSideProfile />
+      </div>
     </ul>
   );
 };
